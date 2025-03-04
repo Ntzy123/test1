@@ -1,1 +1,5 @@
-print(f'Hello World')
+from flask import Flask
+@app.route('/')
+def index():
+  return "<h1>Hello World</h1>"
+  
