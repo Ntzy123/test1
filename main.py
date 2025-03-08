@@ -5,8 +5,8 @@ app = Flask(__name__)
 DIRECTORY = "download/"
 
 @app.route('/')
-def hello():
-    return '<h1>Hello, Flask!</h1>'
+def index():
+    return render_template('index.html')
 
 
 ###/download下载页面
