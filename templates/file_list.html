@@ -1,11 +1,115 @@
 <!DOCTYPE html>
-<html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>文件下载列表</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 30px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 2.2rem;
+        }
+
+        .file-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .file-item {
+            display: flex;
+            align-items: center;
+            padding: 15px;
+            margin-bottom: 10px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .file-item:hover {
+            background: #e9ecef;
+            transform: translateX(5px);
+        }
+
+        .file-icon {
+            margin-right: 15px;
+            color: #6a11cb;
+            font-size: 1.5rem;
+        }
+
+        .file-link {
+            flex-grow: 1;
+            color: #2c3e50;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .file-link:hover {
+            color: #6a11cb;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-top: 30px;
+            padding: 10px 20px;
+            background: #6a11cb;
+            color: white;
+            text-decoration: none;
+            border-radius: 30px;
+            transition: all 0.3s ease;
+        }
+
+        .back-link:hover {
+            background: #2575fc;
+            transform: translateY(-2px);
+        }
+
+        .empty-message {
+            text-align: center;
+            color: #7f8c8d;
+            font-style: italic;
+            padding: 20px;
+        }
+    </style>
+</head>
+
 <body>
-    <h1>文件列表</h1>
-    <ul>
-        {% for file in files %}
-            <li><a href="/download/{{ file }}">{{ file }}</a></li>
-        {% endfor %}
-    </ul>
+    <div class="container">
+        <h1>文件下载列表</h1>
+
+        {% if files %}
+        <ul class="file-list">
+            {% for file in files %}
+            <li class="file-item">
+                <span class="file-icon">📄</span>
+                <a href="/download/{{ file }}" class="file-link">{{ file }}</a>
+            </li>
+            {% endfor %}
+        </ul>
+        {% else %}
+        <p class="empty-message">当前没有可下载的文件</p>
+        {% endif %}
+
+        <a href="/" class="back-link">返回首页</a>
+    </div>
 </body>
 </html>

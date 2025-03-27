@@ -4,6 +4,7 @@ import os
 app = Flask(__name__)
 DIRECTORY = "download/"
 
+#主页
 @app.route('/')
 def index():
     return render_template('index.html')
