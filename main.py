@@ -47,35 +47,35 @@ def upload_file():
     try:
         if 'file' not in request.files:
             flash('未选择文件')
-            return redirect(url_for('index'))
+            return redirect(url_for('list_directory'))
         
         file = request.files['file']
         if file.filename == '':
             flash('未选择文件')
-            return redirect(url_for('index'))
+            return redirect(url_for('list_directory'))
         
         # 验证密钥
         secret_key = get_secret_key()
         if not secret_key:
             flash('服务器配置错误')
-            return redirect(url_for('index'))
+            return redirect(url_for('list_directory'))
             
         provided_key = request.form.get('secret_key', '')
         if provided_key != secret_key:
             flash('无效的上传密钥')
-            return redirect(url_for('index'))
+            return redirect(url_for('list_directory'))
         
         # 确保文件名安全
         filename = secure_filename(file.filename)
         if not filename:
             flash('无效的文件名')
-            return redirect(url_for('index'))
+            return redirect(url_for('list_directory'))
         
         # 保存文件到download目录
         filepath = os.path.join(DOWNLOAD_DIRECTORY, filename)
         file.save(filepath)
         flash('文件上传成功')
-        return redirect(url_for('index'))
+        return redirect(url_for('list_directory'))
         
     except Exception as e:
         app.logger.error(f'上传错误: {str(e)}')
